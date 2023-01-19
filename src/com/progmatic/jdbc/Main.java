@@ -30,6 +30,39 @@ public class Main {
         System.out.println("(V)issza a fomenube");
     }
 
+    private void printClient(){
+        System.out.println("Uj vasarlo (h)ozzaadasa");
+        System.out.println("Vasarlo (m)odositasa");
+        System.out.println("Vasarlo (t)orlese");
+        System.out.println("Vasarlok (l)istaja");
+        System.out.println("(V)issza a fomenube");
+    }
+
+    private void printCourier(){
+        System.out.println("Uj futar (h)ozzaadasa");
+        System.out.println("Futar (m)odositasa");
+        System.out.println("Futar (t)orlese");
+        System.out.println("Futarok (l)istaja");
+        System.out.println("(V)issza a fomenube");
+    }
+
+    private void printOrder(){
+        System.out.println("Uj rendeles (h)ozzaadasa");
+        System.out.println("Rendeles (m)odositasa");
+        System.out.println("Rendeles (t)orlese");
+        System.out.println("Rendeles (l)istaja");
+        System.out.println("(V)issza a fomenube");
+    }
+
+    private void printOrderItem(){
+        System.out.println("Uj tetel (h)ozzaadasa");
+        System.out.println("Tetel (m)odositasa");
+        System.out.println("Tetel (t)orlese");
+        System.out.println("Rendeles (l)istaja");
+        System.out.println("(V)issza a fomenube");
+    }
+
+
     public void start() {
         try (
             Scanner sc = new Scanner(System.in);
