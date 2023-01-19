@@ -1,6 +1,5 @@
 package com.progmatic.jdbc;
 
-import com.progmatic.jdbc.dao.PizzaDao;
 import com.progmatic.jdbc.model.Client;
 import com.progmatic.jdbc.model.Courier;
 import com.progmatic.jdbc.model.Order;
