@@ -17,6 +17,7 @@ public class Main {
         System.out.println("(V)evo menu");
         System.out.println("(F)utar menu");
         System.out.println("(P)izza menu");
+        System.out.println("(T)etel menu");
         System.out.println("Kere(s)es");
         System.out.println("(K)ilepes");
     }
@@ -57,7 +58,7 @@ public class Main {
         System.out.println("Uj tetel (h)ozzaadasa");
         System.out.println("Tetel (m)odositasa");
         System.out.println("Tetel (t)orlese");
-        System.out.println("Rendeles (l)istaja");
+        System.out.println("Tetelek (l)istaja");
         System.out.println("(V)issza a fomenube");
     }
 
@@ -195,9 +196,31 @@ public class Main {
                             this.printPizza();
                         }
                     }
-                    case "s" ->
-                            System.out.println("kereses");
+                    case "t" -> {
+                        printOrderItem();
+                        while (!(s = sc.nextLine()).equalsIgnoreCase("v")) {
+                            switch (s.toLowerCase()) {
+                                case "h" -> {
+                                    System.out.println("\n");
+                                }
+                                case "m" -> {
+                                    System.out.println("\n");
+                                }
+                                case "t" -> {
+                                    System.out.println("\n");
+                                }
+                                case "l" -> {
+                                    System.out.println("\n");
+                                }
+                                default -> System.out.println("Ilyen menuelem nincs, kerem valasszon ujra.\n");
+                            }
+                            this.printOrderItem();
+                        }
+                    }
+                    case "s" -> {
+                        System.out.println("kereses");
 //                        this.startSearch(engine);
+                    }
                     default -> System.out.println("Ilyen menuelem nincs, kerem valasszon ujra.\n");
                 }
                 this.printMenu();
