@@ -13,12 +13,11 @@ import java.util.Scanner;
 public class Main {
 
     private void printMenu() {
-        System.out.println("(U)j rendeles");
-        System.out.println("Kere(s)es");
-        System.out.println("Ve(v)ok listaja");
-        System.out.println("Fu(t)arok listaja");
+        System.out.println("(R)endeles menu");
+        System.out.println("(V)evo menu");
+        System.out.println("(F)utar menu");
         System.out.println("(P)izza menu");
-        System.out.println("Ren(d)elesek listaja");
+        System.out.println("Kere(s)es");
         System.out.println("(K)ilepes");
     }
 
@@ -76,31 +75,80 @@ public class Main {
             this.printMenu();
             while (!(s = sc.nextLine()).equalsIgnoreCase("k")) {
                 switch (s.toLowerCase()) {
-                    case "u" ->
-                        System.out.println("uj rendeles");
-                    case "s" ->
-                        System.out.println("kereses");
-//                        this.startSearch(engine);
+                    case "r" -> {
+                        printOrder();
+                        while (!(s = sc.nextLine()).equalsIgnoreCase("v")) {
+                            switch (s.toLowerCase()) {
+                                case "h" -> {
+                                    System.out.println("\n");
+                                }
+                                case "m" -> {
+                                    System.out.println("\n");
+                                }
+                                case "t" -> {
+                                    System.out.println("\n");
+                                }
+                                case "l" -> {
+                                    List<Order> allO = controll.getAllOrder();
+                                    for (Order o : allO) {
+                                        System.out.println(o);
+                                    }
+                                    System.out.println("\n");
+                                }
+                                default -> System.out.println("Ilyen menuelem nincs, kerem valasszon ujra.\n");
+                            }
+                            this.printOrder();
+                        }
+                    }
                     case "v" -> {
-                        List<Client> allC = controll.getAllClient();
-                        for (Client c : allC) {
-                            System.out.println(c);
+                        printClient();
+                        while (!(s = sc.nextLine()).equalsIgnoreCase("v")) {
+                            switch (s.toLowerCase()) {
+                                case "h" -> {
+                                    System.out.println("\n");
+                                }
+                                case "m" -> {
+                                    System.out.println("\n");
+                                }
+                                case "t" -> {
+                                    System.out.println("\n");
+                                }
+                                case "l" -> {
+                                    List<Client> allC = controll.getAllClient();
+                                    for (Client c : allC) {
+                                        System.out.println(c);
+                                    }
+                                    System.out.println("\n");
+                                }
+                                default -> System.out.println("Ilyen menuelem nincs, kerem valasszon ujra.\n");
+                            }
+                            this.printClient();
                         }
-                        System.out.println("\n");
                     }
-                    case "d" -> {
-                        List<Order> allO = controll.getAllOrder();
-                        for (Order o : allO) {
-                            System.out.println(o);
+                    case "f" -> {
+                        printCourier();
+                        while (!(s = sc.nextLine()).equalsIgnoreCase("v")) {
+                            switch (s.toLowerCase()) {
+                                case "h" -> {
+                                    System.out.println("\n");
+                                }
+                                case "m" -> {
+                                    System.out.println("\n");
+                                }
+                                case "t" -> {
+                                    System.out.println("\n");
+                                }
+                                case "l" -> {
+                                    List<Courier> allC = controll.getAllCourier();
+                                    for (Courier c : allC) {
+                                        System.out.println(c);
+                                    }
+                                    System.out.println("\n");
+                                }
+                                default -> System.out.println("Ilyen menuelem nincs, kerem valasszon ujra.\n");
+                            }
+                            this.printCourier();
                         }
-                        System.out.println("\n");
-                    }
-                    case "t" -> {
-                        List<Courier> allC = controll.getAllCourier();
-                        for (Courier c : allC) {
-                            System.out.println(c);
-                        }
-                        System.out.println("\n");
                     }
                     case "p" -> {
                         printPizza();
@@ -135,7 +183,7 @@ public class Main {
                                     controll.deletePizza(new Pizza(id,null,null));
                                     System.out.println("\n");
                                 }
-                                case "p" -> {
+                                case "l" -> {
                                     List<Pizza> allP = controll.getAllPizza();
                                     for (Pizza p : allP) {
                                         System.out.println(p);
@@ -147,6 +195,9 @@ public class Main {
                             this.printPizza();
                         }
                     }
+                    case "s" ->
+                            System.out.println("kereses");
+//                        this.startSearch(engine);
                     default -> System.out.println("Ilyen menuelem nincs, kerem valasszon ujra.\n");
                 }
                 this.printMenu();
