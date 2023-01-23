@@ -55,17 +55,48 @@ public class CourierDao implements Dao<Courier> {
 
     @Override
     public void save(Courier courier) {
-
+        try (
+                PreparedStatement s = engine.getConnection().prepareStatement("INSERT INTO futar VALUES\n" +
+                        "(?,?,?);");
+        ) {
+            s.setLong(1, courier.cid());
+            s.setString(2, courier.name());
+            s.setString(3, courier.tel());
+            s.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void update(Courier courier, String[] params) {
+        try (
+                PreparedStatement s = engine.getConnection().prepareStatement("UPDATE futar SET " +
+                        "fazon = ? and fnev = ? and ftel = ?" +
+                        "where fazon = ?\n");
+        ) {
 
+            s.setLong(4, courier.cid());
+            if (params[0] != null) s.setLong(1, Long.parseLong(params[0]));
+            if (params[1] != null)s.setString(2, params[1]);
+            if (params[2] != null)s.setString(3, params[2]);
+
+            s.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void delete(Courier courier) {
-
+        try (
+                PreparedStatement s = engine.getConnection().prepareStatement("DELETE FROM futar WHERE fazon = ?;");
+        ) {
+            s.setLong(1, courier.cid());
+            s.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static Courier resultToCourier(ResultSet rs) throws SQLException {

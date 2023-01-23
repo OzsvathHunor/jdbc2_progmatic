@@ -27,6 +27,8 @@ public class DBEngine implements AutoCloseable {
         prop.put("user", System.getenv("progmatic_db_user"));
         prop.put("password", System.getenv("progmatic_db_passwd"));
 
+
+        System.out.println(prop);
         try {
             this.connection = DriverManager.getConnection(url, prop);
         } catch (SQLException e) {

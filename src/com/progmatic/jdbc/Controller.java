@@ -47,6 +47,14 @@ public class Controller implements AutoCloseable {
 
     public void deletePizza(Pizza pizza){this.pizzaDao.delete(pizza);};
 
+    public void addCourier(Courier courier){this.courierDao.save(courier);};
+
+    public void updateCourier(Courier courier, String[] params){
+        this.courierDao.update(courier, params);
+    }
+
+    public void deleteCourier(Courier courier){this.courierDao.delete(courier);};
+
     @Override
     public void close() throws Exception {
         if (engine != null && !engine.isClosed()) {
