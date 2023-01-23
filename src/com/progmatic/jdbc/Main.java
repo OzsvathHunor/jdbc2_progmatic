@@ -1,12 +1,13 @@
 package com.progmatic.jdbc;
 
-import com.progmatic.jdbc.model.Client;
-import com.progmatic.jdbc.model.Courier;
-import com.progmatic.jdbc.model.Order;
-import com.progmatic.jdbc.model.Pizza;
+import com.progmatic.jdbc.dao.PizzaDao;
+import com.progmatic.jdbc.model.*;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -80,7 +81,84 @@ public class Main {
                         while (!(s = sc.nextLine()).equalsIgnoreCase("v")) {
                             switch (s.toLowerCase()) {
                                 case "h" -> {
-                                    System.out.println("\n");
+                                    System.out.println("uj rendeles");
+
+                                    long rendelesAzonosito = (long)(Math.random()*100000);
+
+                                    // Kliens hozzáadás/kiválasztás
+
+                                    System.out.println("Add meg a neved: ");
+                                    String name = sc.nextLine();
+
+                                    System.out.println("Add meg a címed: ");
+                                    String address = sc.nextLine();
+
+                                    Client vevo = null;
+                                    Client client = null;
+
+                                    for (var v : controll.getAllClient()) {
+                                        if (Objects.equals(v.name(), name) && Objects.equals(v.address(), address)) {
+                                            vevo = new Client(v.cid(), v.name(), v.address());
+                                            break;
+                                        }
+                                    }
+                                    if (vevo == null){
+                                        long id = (long) (Math.random()*1001000);
+                                        client = new Client(id, name, address);
+                                        controll.addClient(client);
+                                    }
+
+                                    // Pizza hozzáadás
+
+                                    boolean ujPizza = true;
+                                    long pizzaId;
+                                    short darabszam;
+                                    List<OrderItem> items = new ArrayList<>();
+
+                                    while (ujPizza){
+                                        System.out.println("Milyen pizzát rendelnél? Válaszd ki a pizza id -t a listaból: ");
+                                        System.out.println();
+                                        for (var c : controll.getAllPizza()){
+                                            System.out.println(c);
+                                        }
+
+                                        pizzaId = Long.parseLong(sc.nextLine());
+                                        PizzaDao pd = new PizzaDao(new DBEngine());
+                                        Pizza p = pd.get(pizzaId);
+
+                                        System.out.println("Hány darabot kérsz belőle?");
+                                        darabszam = (short) Integer.parseInt(sc.nextLine());
+                                        OrderItem oi = new OrderItem(rendelesAzonosito, p, darabszam);
+                                        controll.addOrderItem(oi);
+                                        items.add(oi);
+
+                                        System.out.println(items);
+
+                                        System.out.println("Szeretnél pizzát rendelni még?  y/n");
+                                        String input = sc.nextLine();
+
+                                        if (input.toLowerCase().equals("n")){
+                                            ujPizza = false;
+                                        }
+                                    }
+
+                                    // idopont hozzáadás
+
+                                    LocalDateTime time = LocalDateTime.now();
+
+                                    // futar hozzáadás
+
+                                    Courier futar;
+                                    List<Courier> futarok = new ArrayList<>(controll.getAllCourier());
+                                    int szam = (int) (Math.random()*5);
+                                    System.out.println(szam);
+                                    futar = futarok.get(szam);
+
+                                    // rendeles felvetel
+
+                                    Order order = new Order(rendelesAzonosito,
+                                            client == null ? vevo : client, futar, items, time);
+                                    controll.addOrder(order);System.out.println("\n");
                                 }
                                 case "m" -> {
                                     System.out.println("\n");

@@ -41,6 +41,17 @@ public class Controller implements AutoCloseable {
 
     public void addPizza(Pizza pizza){this.pizzaDao.save(pizza);};
 
+    public void addOrder(Order order) {
+        orderDao.save(order);
+    }
+
+    public void addOrderItem(OrderItem oi) {
+        orderItemDao.save(oi);
+    }
+    public void addClient(Client client) {
+        clientDao.save(client);
+    }
+
     public void updatePizza(Pizza pizza, String[] params){
         this.pizzaDao.update(pizza, params);
     }
