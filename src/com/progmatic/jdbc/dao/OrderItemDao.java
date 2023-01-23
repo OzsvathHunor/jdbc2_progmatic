@@ -48,14 +48,30 @@ public class OrderItemDao implements Dao<OrderItem> {
 
     private OrderItem resultToOrderItem(ResultSet rs) throws SQLException {
         return new OrderItem(
+            rs.getLong("razon"),
             this.pizzaDao.get(rs.getLong("pazon")),
             rs.getShort("db")
+
         );
     }
 
     @Override
     public void save(OrderItem orderItem) {
 
+        try (
+                PreparedStatement ps = engine.getConnection().prepareStatement("INSERT INTO tetel " +
+                        "VALUES (?, ?, ?);")
+        ) {
+
+
+            ps.setLong(1, orderItem.orderId());
+            ps.setLong(2, orderItem.pizza().pid());
+            ps.setShort(3, orderItem.number());
+            ps.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

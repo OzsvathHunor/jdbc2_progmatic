@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class ClientDao implements Dao<Client> {
 
@@ -64,6 +65,24 @@ public class ClientDao implements Dao<Client> {
     @Override
     public void save(Client client) {
 
+        for (var c : getAll()) {
+            if (Objects.equals(client.cid(), c.cid())) {
+                System.out.println("Már létező kliens!");
+                return;
+            }
+        }
+
+        try (
+                PreparedStatement s = engine.getConnection().prepareStatement("INSERT INTO vevo values(?, ?, ?);");
+        ) {
+            s.setLong(1, client.cid());
+            s.setString(2, client.name());
+            s.setString(3, client.address());
+            s.execute();
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
