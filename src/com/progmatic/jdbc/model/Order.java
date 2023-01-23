@@ -1,5 +1,6 @@
 package com.progmatic.jdbc.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
